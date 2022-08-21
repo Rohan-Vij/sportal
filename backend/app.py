@@ -261,6 +261,10 @@ def get_all_posts():
     all_posts = list(posts.find())
     return jsonify(all_posts), 200
 
+# @app.route("/posts/search", methods=["POST"])
+
+## -- End Post Management -- ##
+
 
 # Helper functions
 
