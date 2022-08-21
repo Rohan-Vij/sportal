@@ -10,13 +10,9 @@ const Search = () => {
 
   useEffect(() => {
     (async () => {
-<<<<<<< HEAD
       const response = await PostsService.getAll();
       console.log(response);
       setData(response);
-=======
-      setData(await UserService.getAll());
->>>>>>> 684c71282e1e703f83156b2158fdc7a6d74ec695
     })();
   }, []);
 
