@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        title: ["Aboreto", "Inter", ...defaultTheme.fontFamily.sans],
+        slogan: ["Bebas Neue", "Inter", ...defaultTheme.fontFamily.sans]
       },
       colors: {
         "dark-border": "#878787",
