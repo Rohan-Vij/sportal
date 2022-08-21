@@ -13,8 +13,6 @@ class AuthService {
       { validateStatus: false }
     );
 
-    console.log(response.data);
-
     if (response.data.access_token) {
       localStorage.setItem("user", JSON.stringify(response.data));
     }

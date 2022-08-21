@@ -14,6 +14,7 @@ import {
   mdiVolleyball,
 } from "@mdi/js";
 import Button from "../components/Button";
+import formatTime from "../util/formatTime";
 
 const Post = ({
   sport,
@@ -24,6 +25,7 @@ const Post = ({
   description,
   difficulty,
   postedBy,
+  key
 }) => {
   let sportIcon;
   if (sport === "Volleyball") {
@@ -47,7 +49,7 @@ const Post = ({
   }
 
   return (
-    <div className="relative p-6 max-w-3xl h-52 bg-white rounded-2xl border border-gray-200 shadow-md">
+    <div className="relative p-6 max-w-3xl h-52 bg-white rounded-2xl border border-gray-200 shadow-md" key={key}>
       <div className="flex">
         <div className="">
           <Icon
@@ -87,7 +89,7 @@ const Post = ({
         </div>
         <div className="mt-2 w-40">
           <h5 className="mb-1 text-lg font-bold tracking-tight text-gray-900 text-end">
-            {start} - {end}
+            {formatTime(start)} - {formatTime(end)}
           </h5>
           <div className="flex justify-end mb-1">
             <Icon

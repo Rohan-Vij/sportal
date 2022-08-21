@@ -10,7 +10,9 @@ const Search = () => {
 
   useEffect(() => {
     (async () => {
-      setData(await PostsService.getAll());
+      const response = await PostsService.getAll();
+      console.log(response);
+      setData(response);
     })();
   }, []);
 
@@ -18,33 +20,19 @@ const Search = () => {
     <div className="w-full h-full flex flex-col">
       <Navbar />
       <div className="w-full p-5 bg-background flex flex-col items-center space-y-5 h-full overflow-x-none overflow-y-auto">
-        {data.map(
-          (
-            {
-              sport,
-              location,
-              poster,
-              start_date,
-              end_date,
-              description,
-              level,
-              max_players,
-            },
-            idx
-          ) => {
-            <Post
-              sport={sport}
-              start={start_date}
-              end={end_date}
-              description={description}
-              difficulty={level}
-              location={location}
-              postedBy={poster}
-              spots={max_players}
-              key={idx}
-            />;
-          }
-        )}
+        {data.map((post) => (
+          <Post
+            sport={post.sport}
+            start={post.start_date}
+            end={post.end_date}
+            description={post.description}
+            difficulty={post.level}
+            location={post.location}
+            postedBy={post.poster}
+            spots={post.max_players}
+            key={post._id}
+          />
+        ))}
       </div>
     </div>
   );
