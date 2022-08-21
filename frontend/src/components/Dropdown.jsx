@@ -41,7 +41,7 @@ const Dropdown = ({ title, htmlFor, elements, value, setValue }) => {
         id="dropdown"
         className={`${
           clicked ? "visible" : "hidden"
-        } z-10 w-full bg-white divide-y divide-gray-100 border-dark-border border-4 rounded-xl`}
+        } z-10 w-96 bg-white divide-y divide-gray-100 border-dark-border border-4 rounded-xl fixed`}
       >
         <ul
           className="py-1 text-sm text-black max-h-32 overflow-y-auto"

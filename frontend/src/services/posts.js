@@ -39,7 +39,7 @@ class UserService {
     max_players
   ) {
     return await axios.post(
-      API_URL + "mod",
+      API_URL + "create",
       {
         sport,
         location,

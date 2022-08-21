@@ -105,11 +105,12 @@ def signup():
         "dob": dob
     }
 
-    _id = users.insert_one(
-        signup_document).inserted_id
+    _id = users.insert_one(signup_document).inserted_id
 
     access_token = create_access_token(identity=str(_id))
-    refresh_token = create_refresh_token(identity=str(user["_id"]))
+    refresh_token = create_refresh_token(identity=str(_id))
+
+    signup_document["_id"] = str(signup_document["_id"])
 
     return jsonify(access_token=access_token, refresh_token=refresh_token, user_data=signup_document), 200
 
@@ -330,7 +331,7 @@ def get_all_posts():
     all_posts = list(posts.find())
     for post in all_posts:
       post["_id"] = str(post["_id"])
-      
+
     return jsonify(posts=all_posts), 200
 
 
