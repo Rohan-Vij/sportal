@@ -7,10 +7,17 @@ const API_URL = "http://localhost:8000/posts/";
 
 class UserService {
   async getAll() {
-    return await axios.get(API_URL + "all", {
+    const response = (await axios.get(API_URL + "all", {
       validateStatus: false,
       headers: authHeader(),
-    }).data.posts;
+    })).data.posts;
+
+    for (const post of response) {
+      post.start_date = new Date(post.start_date * 1000);
+      post.end_date = new Date(post.end_date * 1000);
+    }
+
+    return response;
   }
 
   async search(query) {
@@ -48,10 +55,15 @@ class UserService {
   }
 
   async getPost(id) {
-    return await axios.get(API_URL + "posts/" + id, {
+    const response = (await axios.get(API_URL + "posts/" + id, {
       validateStatus: false,
       headers: authHeader(),
-    }).data.post;
+    })).data.post;
+
+    response.start_date = new Date(response.start_date * 1000);
+    response.end_date = new Date(response.end_date * 1000);
+
+    return response;
   }
 
   async addUserToPost(id) {

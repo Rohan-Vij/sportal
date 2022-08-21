@@ -206,8 +206,8 @@ def create_post():
     sport = request.json.get("sport", None)
     location = request.json.get("location", None)
     poster = request.json.get("poster", None)
-    start_date = request.json.get("date", None)
-    end_date = request.json.get("date", None)
+    start_date = request.json.get("start_date", None)
+    end_date = request.json.get("end_date", None)
     description = request.json.get("description", None)
     level = request.json.get("level", None)
     max_players = request.json.get("max_players", None)
@@ -328,6 +328,9 @@ def get_all_posts():
     """
 
     all_posts = list(posts.find())
+    for post in all_posts:
+      post["_id"] = str(post["_id"])
+      
     return jsonify(posts=all_posts), 200
 
 
