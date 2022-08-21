@@ -1,4 +1,4 @@
-"""Main entrypoint file for the Sportly API."""
+"""Main entrypoint file for the Sportal API."""
 from datetime import timedelta
 import os
 
@@ -69,6 +69,8 @@ def login():
         return jsonify({"message": "User not found"}), 404
     if password != user["password"]:
         return jsonify({"msg": "Incorrect password"}), 401
+
+    user["_id"] = str(user["_id"])
 
     access_token = create_access_token(identity=str(user["_id"]))
     refresh_token = create_refresh_token(identity=str(user["_id"]))

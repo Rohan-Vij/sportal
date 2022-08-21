@@ -8,12 +8,12 @@ class AuthService {
       .post(API_URL + "login", {
         email,
         password,
-      })
+      }, { validateStatus: false })
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        return response.data;
+        return response;
       });
   }
 
@@ -29,7 +29,7 @@ class AuthService {
       phone,
       gender,
       dob,
-    });
+    }, { validateStatus: false });
   }
 
   getCurrentUser() {
@@ -39,14 +39,14 @@ class AuthService {
   updatePassword() {
     return axios.patch(API_URL + "update_password", {
       password,
-    });
+    }, { validateStatus: false });
   }
 
   updateProfile(email, phone) {
     return axios.patch(API_URL + "update_info", {
         email,
         phone
-    }); 
+    }, { validateStatus: false }); 
   }
 }
 export default new AuthService();

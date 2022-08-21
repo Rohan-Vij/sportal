@@ -1,4 +1,4 @@
-# Sportly API
+# Sportal API
 
 ## Requirements
 
