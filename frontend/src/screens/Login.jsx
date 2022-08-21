@@ -1,43 +1,44 @@
-import InputField from "../components/InputField";
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import colors from "tailwindcss/colors";
+
+import InputField from "../components/InputField";
+import Button from "../components/Button";
+
+import theme from "../theme";
+
+const defaultStatus = {
+  icon: undefined,
+  color: undefined,
+  tooltip: undefined,
+};
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [emailStatus, setEmailStatus] = useState({
-    icon: undefined,
-    color: undefined,
-    tooltip: undefined,
-  });
+  const [emailStatus, setEmailStatus] = useState(defaultStatus);
+
   const [password, setPassword] = useState("");
-  const [passwordStatus, setPasswordStatus] = useState({
-    icon: undefined,
-    color: undefined,
-    tooltip: undefined,
-  });
+  const [passwordStatus, setPasswordStatus] = useState(defaultStatus);
 
   useEffect(() => {
     setEmailStatus({
       icon: "error",
-      color: colors.red[600],
+      color: theme.theme.colors.red[600],
       tooltip:
         "Error!!!!!!!!! hieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeee",
     });
     setPasswordStatus({
       icon: "check",
-      color: colors.green[600],
+      color: theme.theme.colors.green[600],
     });
   }, []);
 
   return (
     <div className="h-full w-full flex flex-row">
       {/* left title bar */}
-      <div className="bg-main h-full w-1/3 flex flex-col space-y-10 justify-center items-center">
-        <h1 className="text-white text-[5rem] font-extrabold">sportal</h1>
-        <h2 className="text-white text-[2rem]">lorem ipsum dolar amit</h2>
+      <div className="bg-main h-full w-1/3 flex flex-col justify-center items-center">
+        <h1 className="text-white text-[5rem] font-extrabold font-title">sportal</h1>
+        <h2 className="text-white text-[2rem] font-slogan">Connect. Organize. Play.</h2>
       </div>
 
       {/* right content screen (with login) */}
@@ -45,7 +46,7 @@ const Login = () => {
         {/* login box */}
         <div className="bg-white border-light-border border-4 rounded-3xl p-20 flex flex-col items-center justify-center space-y-10">
           <h1 className="text-black text-5xl font-extrabold">Login</h1>
-          <form className="w-96 flex flex-col items-center justify-center space-y-10">
+          <form className="w-80 flex flex-col items-center justify-center space-y-10">
             <InputField
               title="Email"
               htmlFor="email"
@@ -59,6 +60,7 @@ const Login = () => {
             <InputField
               title="Password"
               htmlFor="password"
+              placeholder="Enter password here..."
               value={password}
               setValue={setPassword}
               status={passwordStatus.icon}
