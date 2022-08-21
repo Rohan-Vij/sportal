@@ -24,25 +24,10 @@ const Login = () => {
 
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    setEmailStatus({
-      icon: "error",
-      color: theme.theme.colors.red[600],
-      tooltip:
-        "Error!",
-    });
-    setPasswordStatus({
-      icon: "check",
-      color: theme.theme.colors.green[600],
-    });
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await AuthService.login(email, password);
-
-    console.log(response);
 
     if (response.status === 200) {
       navigate("/");
@@ -53,7 +38,6 @@ const Login = () => {
         tooltip: "We could not find a user with that email.",
       });
       setMessage("We could not find a user with that email.");
-
     } else if (response.status === 401) {
       setPasswordStatus({
         icon: "error",
@@ -61,7 +45,6 @@ const Login = () => {
         tooltip: "Incorrect password.",
       });
       setMessage("Incorrect password.");
-
     } else {
       setEmailStatus({
         icon: "error",
@@ -77,15 +60,18 @@ const Login = () => {
 
       setMessage("Something went wrong.");
     }
-  }
-
+  };
 
   return (
     <div className="h-full w-full flex flex-row">
       {/* left title bar */}
       <div className="bg-main h-full w-1/3 flex flex-col justify-center items-center">
-        <h1 className="text-white text-[5rem] font-extrabold font-title">sportal</h1>
-        <h2 className="text-white text-[2rem] font-slogan">Connect. Organize. Play.</h2>
+        <h1 className="text-white text-[5rem] font-extrabold font-title">
+          sportal
+        </h1>
+        <h2 className="text-white text-[2rem] font-slogan">
+          Connect. Organize. Play.
+        </h2>
       </div>
 
       {/* right content screen (with login) */}
@@ -93,11 +79,21 @@ const Login = () => {
         {/* login box */}
         <div className="bg-white border-light-border border-4 rounded-3xl p-20 flex flex-col items-center justify-center space-y-10">
           <h1 className="text-black text-5xl font-extrabold">Login</h1>
-          {message && <p className="text-red-600 font-bold"><span className="material-icons select-none relative top-[6px]">error</span> {message}</p>}
-          <form className="w-80 flex flex-col items-center justify-center space-y-10" onSubmit={handleSubmit}>
+          {message && (
+            <p className="text-red-600 font-bold">
+              <span className="material-icons select-none relative top-[6px]">
+                error
+              </span>{" "}
+              {message}
+            </p>
+          )}
+          <form
+            className="w-80 flex flex-col items-center justify-center space-y-10"
+            onSubmit={handleSubmit}
+          >
             <InputField
               title="Email"
-              htmlFor="email" 
+              htmlFor="email"
               value={email}
               setValue={setEmail}
               placeholder="example@gmail.com"

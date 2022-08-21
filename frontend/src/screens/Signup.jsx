@@ -8,6 +8,8 @@ import StyledDatePicker from "../components/StyledDatePicker";
 import theme from "../theme";
 import Dropdown from "../components/Dropdown";
 
+import AuthService from "../services/auth";
+
 const defaultStatus = {
   icon: undefined,
   color: undefined,
@@ -32,6 +34,8 @@ const Signup = () => {
 
   const [dob, setDOB] = useState(new Date());
 
+  const [message, setMessage] = useState("");
+
   const leftFormSide = useRef();
   const rightFormSide = useRef();
 
@@ -41,18 +45,50 @@ const Signup = () => {
     rightFormSide.current.style = `height: ${rightFormSide.current.offsetHeight}px;`;
   });
 
-  useEffect(() => {
-    setEmailStatus({
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const errorStatus = (tooltip) => ({
       icon: "error",
       color: theme.theme.colors.red[600],
-      tooltip:
-        "Error!!!!!!!!! hieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeeehieeeeeeeeeeeeeeee",
+      tooltip: tooltip,
     });
-    setPasswordStatus({
-      icon: "check",
-      color: theme.theme.colors.green[600],
-    });
-  }, []);
+
+    if (!name || !password || !email || !phoneNumber || !gender || !dob) {
+      setMessage("Please fill out all the fields.");
+      if (!name) setNameStatus(errorStatus("Required field."));
+      if (!password) setPasswordStatus(errorStatus("Required field."));
+      if (!email) setEmailStatus(errorStatus("Required field."));
+      if (!phoneNumber) setPhoneNumberStatus(errorStatus("Required field."));
+
+      return;
+    }
+
+    const response = await AuthService.register(
+      name,
+      password,
+      email,
+      phoneNumber,
+      gender,
+      dob
+    );
+
+    if (response.status === 200) {
+      navigate("/");
+    } else if (response.status === 400) {
+      setEmailStatus({
+        icon: "error",
+        color: theme.theme.colors.red[600],
+        tooltip:
+          "A user with that email already exists! Did you mean to sign in?",
+      });
+      setMessage(
+        "A user with that email already exists! Did you mean to sign in?"
+      );
+    } else {
+      setMessage("Something went wrong.");
+    }
+  };
 
   return (
     <div className="h-full w-full flex flex-row">
@@ -71,6 +107,14 @@ const Signup = () => {
         {/* login box */}
         <div className="bg-white border-light-border border-4 rounded-3xl p-20 flex flex-col items-center justify-center space-y-10">
           <h1 className="text-black text-5xl font-extrabold">Signup</h1>
+          {message && (
+            <p className="text-red-600 font-bold">
+              <span className="material-icons select-none relative top-[6px]">
+                error
+              </span>
+              {message}
+            </p>
+          )}
           <form className="flex flex-col items-center justify-center space-y-10">
             <div className="flex flex-row items-center justify-center space-x-10">
               <div
@@ -145,7 +189,7 @@ const Signup = () => {
               >
                 Already have an account?
               </a>
-              <Button text="Submit" />
+              <Button text="Submit" onClick={handleSubmit} />
             </div>
           </form>
         </div>

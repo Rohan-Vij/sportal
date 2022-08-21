@@ -5,10 +5,12 @@ import AuthService from "../services/auth";
 const Home = () => {
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    console.log("Reached home!");
     if (!AuthService.getCurrentUser()) {
       navigate("/login");
+    } else {
+      navigate("/search");
     }
   }, []);
 
