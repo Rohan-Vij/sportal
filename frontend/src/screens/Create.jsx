@@ -4,7 +4,8 @@ import Dropdown from "../components/Dropdown";
 import { useState } from "react";
 import StyledDatePicker from "../components/StyledDatePicker";
 import Button from "../components/Button";
-
+import AuthService from "../services/auth";
+import UserService from "../services/posts";
 const Create = () => {
   const [sport, setSport] = useState();
   const [location, setLocation] = useState();
@@ -14,7 +15,9 @@ const Create = () => {
   );
   const [spots, setSpots] = useState(5);
   const [description, setDescription] = useState("");
-
+  const createPost= async ()=>{
+    await UserService.create(sport,location, AuthService.getCurrentUser(),startDateTime, endDateTime, description, spots)
+  }
   return (
     <div className="w-full h-full flex flex-col">
       <Navbar />
@@ -82,7 +85,7 @@ const Create = () => {
           </div>
         </div>
         <div className="flex w-full justify-center">
-          <Button text="Submit" className="w-96" onClick={() => {}} />
+          <Button text="Submit" className="w-96" onClick={createPost} />
         </div>
       </div>
     </div>

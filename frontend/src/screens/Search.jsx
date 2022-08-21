@@ -1,4 +1,4 @@
-import PostsService from "../services/posts";
+import UserService from "../services/posts";
 
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ const Search = () => {
 
   useEffect(() => {
     (async () => {
-      setData(await PostsService.getAll());
+      setData(await UserService.getAll());
     })();
   }, []);
 
