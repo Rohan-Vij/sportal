@@ -25,7 +25,7 @@ const Post = ({
   description,
   difficulty,
   postedBy,
-  key
+  key,
 }) => {
   let sportIcon;
   if (sport === "Volleyball") {
@@ -49,7 +49,10 @@ const Post = ({
   }
 
   return (
-    <div className="relative p-6 max-w-3xl h-52 bg-white rounded-2xl border border-gray-200 shadow-md" key={key}>
+    <div
+      className="relative p-6 max-w-3xl h-52 bg-white rounded-2xl border border-gray-200 shadow-md"
+      key={key}
+    >
       <div className="flex">
         <div className="">
           <Icon
@@ -87,7 +90,7 @@ const Post = ({
             <p className="text-sm font-normal text-black">{location}</p>
           </div>
         </div>
-        <div className="mt-2 w-40">
+        <div className="mt-2 w-60">
           <h5 className="mb-1 text-lg font-bold tracking-tight text-gray-900 text-end">
             {formatTime(start)} - {formatTime(end)}
           </h5>
@@ -108,6 +111,10 @@ const Post = ({
           <Button
             text="Sign Up"
             className="absolute h-12 bottom-3 right-3 text-xl p-0"
+            onClick={(e) => {
+              e.target.style.backgroundColor = "gray";
+              e.target.textContent = "Signed Up";
+            }}
           />
         </div>
       </div>

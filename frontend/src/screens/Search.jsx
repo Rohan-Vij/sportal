@@ -10,7 +10,7 @@ const Search = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await PostsService.getAll();
+      const response = await UserService.getAll();
       console.log(response);
       setData(response);
     })();
@@ -20,7 +20,7 @@ const Search = () => {
     <div className="w-full h-full flex flex-col">
       <Navbar />
       <div className="w-full p-5 bg-background flex flex-col items-center space-y-5 h-full overflow-x-none overflow-y-auto">
-        {data.map((post) => (
+        {data.length > 0 ? data.map((post) => (
           <Post
             sport={post.sport}
             start={post.start_date}
@@ -32,7 +32,7 @@ const Search = () => {
             spots={post.max_players}
             key={post._id}
           />
-        ))}
+        )) : <h1 className="text-3xl mt-10">No posts! Create one to get started.</h1>}
       </div>
     </div>
   );
