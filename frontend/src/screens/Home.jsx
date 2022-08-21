@@ -5,7 +5,6 @@ import AuthService from "../services/auth";
 const Home = () => {
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (!AuthService.getCurrentUser()) {
       navigate("/login");
@@ -14,7 +13,7 @@ const Home = () => {
     }
   }, []);
 
-  return <h1>hi</h1>;
+  return <></>;
 };
 
 export default Home;

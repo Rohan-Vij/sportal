@@ -7,10 +7,12 @@ const API_URL = "https://sportal2.herokuapp.com/posts/";
 
 class UserService {
   async getAll() {
-    const response = (await axios.get(API_URL + "all", {
-      validateStatus: false,
-      headers: authHeader(),
-    })).data.posts;
+    const response = (
+      await axios.get(API_URL + "all", {
+        validateStatus: false,
+        headers: authHeader(),
+      })
+    ).data.posts;
 
     for (const post of response) {
       post.start_date = new Date(post.start_date * 1000);
@@ -55,10 +57,12 @@ class UserService {
   }
 
   async getPost(id) {
-    const response = (await axios.get(API_URL + "posts/" + id, {
-      validateStatus: false,
-      headers: authHeader(),
-    })).data.post;
+    const response = (
+      await axios.get(API_URL + "posts/" + id, {
+        validateStatus: false,
+        headers: authHeader(),
+      })
+    ).data.post;
 
     response.start_date = new Date(response.start_date * 1000);
     response.end_date = new Date(response.end_date * 1000);
