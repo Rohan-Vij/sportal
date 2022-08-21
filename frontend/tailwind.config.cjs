@@ -9,10 +9,11 @@ module.exports = {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        "dark-border": "#17AFF0",
-        "light-border": "#878787",
+        "dark-border": "#878787",
+        "light-border": "#D9D9D9",
         main: "#17AFF0",
         accent: "#19C93F",
+        "dark-accent": "#16b639",
         background: "#F4F4F4",
       },
     },

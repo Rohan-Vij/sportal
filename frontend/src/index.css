@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#arrow,
+#arrow::before {
+  position: absolute;
+  bottom: -5.8px;
+  width: theme(spacing.4);
+  height: theme(spacing.4);
+  background: inherit;
+  border-bottom: theme(borderWidth.2) solid theme(colors.light-border);
+  border-right: theme(borderWidth.2) solid theme(colors.light-border);
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
+}
