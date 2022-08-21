@@ -17,3 +17,11 @@ To update requirements.txt, run the following commands in your terminal:
 
 Run with `python app.py` (development environment).
 
+
+## .env File
+
+```
+DB_PASSWORD=<DB password here>
+SECRET_KEY=<secret key>
+```
+
