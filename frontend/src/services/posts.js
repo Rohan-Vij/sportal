@@ -51,16 +51,14 @@ class UserService {
 
   addUserToPost(id) {
     return axios.post(
-      API_URL + "posts/" + id + "/add/" + getCurrentUser().user_data.email,
-      {},
+      API_URL + "posts/" + id + "/add/" + AuthService.getCurrentUser().user_data.email,
       { headers: authHeader() }
     );
   }
 
   removeUserFromPost(id) {
     return axios.post(
-      API_URL + "posts/" + id + "/remove/" + getCurrentUser().user_data.email,
-      {},
+      API_URL + "posts/" + id + "/remove/" + AuthService.getCurrentUser().user_data.email,
       { headers: authHeader() }
     );
   }
