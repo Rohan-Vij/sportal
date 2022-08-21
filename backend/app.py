@@ -118,11 +118,52 @@ def refresh():
     """
     Refresh a JWT access token.
 
-    :return: A JWT access token if the user is found and the token is valid, an error otherwise.
+    :return: A JWT access token if the token was refreshed.
     """
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity)
     return jsonify(access_token=access_token)
+
+@app.route("/update_password", methods=["POST"])
+@jwt_required()
+def update_password():
+    """
+    Update the password of the current user.
+
+    :return: A success message if the password was successfully updated, an error otherwise.
+    """
+    password = request.json.get("password", None)
+
+    if not password:
+        return jsonify({"message": "Password not provided"}), 400
+
+    identity = get_jwt_identity()
+    users.update_one({"_id": ObjectId(identity)}, {"$set": {"password": password}})
+    return jsonify({"message": "Password updated"}), 200
+
+@app.route("/update_info", methods=["POST"])
+@jwt_required()
+def update_info():
+    """
+    Update the user's information
+
+    :return: A success message if the user's information was successfully
+             updated, an error otherwise.
+    """
+    email = request.json.get("email", None)
+    phone = request.json.get("phone", None)
+
+    if not email and not phone:
+        return jsonify({"message": "Name or phone number is required"}), 400
+
+    identity = get_jwt_identity()
+    if email:
+        users.update_one({"_id": ObjectId(identity)}, {"$set": {"email": email}})
+    elif phone:
+        users.update_one({"_id": ObjectId(identity)}, {"$set": {"phone": phone}})
+    
+    return jsonify({"message": "Information updated"}), 200
+
 
 ## -- End User Management -- ##
 
@@ -261,7 +302,21 @@ def get_all_posts():
     all_posts = list(posts.find())
     return jsonify(all_posts), 200
 
-# @app.route("/posts/search", methods=["POST"])
+@app.route("/posts/search", methods=["GET"])
+@jwt_required()
+def search_posts():
+    """
+    Search for posts.
+
+    :param search: The search parameters.
+    :return: All posts that match the search criteria.
+    """
+    search = request.args.get("search")
+
+    all_posts = list(posts.find({"location": search}))
+
+    return jsonify(all_posts), 200
+
 
 ## -- End Post Management -- ##
 
