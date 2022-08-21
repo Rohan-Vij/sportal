@@ -170,16 +170,16 @@ def update_info():
     return jsonify({"message": "Information updated"}), 200
 
 
-@app.route("/auth/profile/<id>", methods=["GET"])
+@app.route("/auth/profile/<_id>", methods=["GET"])
 @jwt_required()
-def profile(id):
+def profile(_id):
     """
     Get the user's profile.
 
     :param id: The user's id.
     :return: The user's profile if the user is found, an error otherwise.
     """
-    user = users.find_one({"_id": ObjectId(id)})
+    user = users.find_one({"_id": ObjectId(_id)})
     if not user:
         return jsonify({"message": "User not found"}), 404
 
