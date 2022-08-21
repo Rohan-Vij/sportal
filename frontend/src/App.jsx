@@ -1,15 +1,25 @@
-import Icon from "@mdi/react";
-import {
-  mdiDog
-} from "@mdi/js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import Home from "./screens/Home";
+import Login from "./screens/Login";
+import Signup from "./screens/Signup";
+import Search from "./screens/Search";
+import Create from "./screens/Create";
+
+const App = () => {
+  const loggedIn = false;
+
   return (
-    <div>
-      <h1 className="text-blue-600">Testing Tailwind!</h1>
-      <Icon path={mdiDog} size={1} />
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/create" element={<Create />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App;
