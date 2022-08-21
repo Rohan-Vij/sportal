@@ -3,7 +3,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 import AuthService from "./auth";
 
-const API_URL = "http://localhost:8000/posts/";
+const API_URL = "https://sportal2.herokuapp.com/posts";
 
 class UserService {
   async getAll() {
