@@ -53,7 +53,7 @@ def running_message():
 ## -- User Management -- ##
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/auth/login", methods=["POST"])
 def login():
     """
     Login a user.
@@ -75,7 +75,7 @@ def login():
     return jsonify(access_token=access_token, refresh_token=refresh_token), 200
 
 
-@app.route("/signup", methods=["POST"])
+@app.route("/auth/signup", methods=["POST"])
 def signup():
     """
     Signup a user.
@@ -112,7 +112,7 @@ def signup():
     return jsonify(access_token=access_token, refresh_token=refresh_token), 200
 
 
-@app.route("/refresh", methods=["POST"])
+@app.route("/auth/refresh", methods=["POST"])
 @jwt_required(refresh=True)
 def refresh():
     """
@@ -124,7 +124,7 @@ def refresh():
     access_token = create_access_token(identity=identity)
     return jsonify(access_token=access_token)
 
-@app.route("/update_password", methods=["POST"])
+@app.route("/auth/update_password", methods=["POST"])
 @jwt_required()
 def update_password():
     """
@@ -141,7 +141,7 @@ def update_password():
     users.update_one({"_id": ObjectId(identity)}, {"$set": {"password": password}})
     return jsonify({"message": "Password updated"}), 200
 
-@app.route("/update_info", methods=["POST"])
+@app.route("/auth/update_info", methods=["POST"])
 @jwt_required()
 def update_info():
     """
@@ -327,7 +327,9 @@ def search_posts():
 def query_user(email: str, field="email"):
     """
     Query the database for a user with the given email.
-    :param username: The username to search for.
+
+    :param user: The email to search for.
+    :param field: The field to search in (default "email").
     :return: The user if found, None otherwise.
     """
     user = users.find_one({field: email})
