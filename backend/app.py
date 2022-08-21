@@ -72,7 +72,7 @@ def login():
 
     access_token = create_access_token(identity=str(user["_id"]))
     refresh_token = create_refresh_token(identity=str(user["_id"]))
-    return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+    return jsonify(access_token=access_token, refresh_token=refresh_token, user_data=user), 200
 
 
 @app.route("/auth/signup", methods=["POST"])
@@ -109,7 +109,7 @@ def signup():
     access_token = create_access_token(identity=str(_id))
     refresh_token = create_refresh_token(identity=str(user["_id"]))
 
-    return jsonify(access_token=access_token, refresh_token=refresh_token), 200
+    return jsonify(access_token=access_token, refresh_token=refresh_token, user_data=signup_document), 200
 
 
 @app.route("/auth/refresh", methods=["POST"])
@@ -125,7 +125,7 @@ def refresh():
     return jsonify(access_token=access_token)
 
 
-@app.route("/auth/update_password", methods=["POST"])
+@app.route("/auth/update_password", methods=["PATCH"])
 @jwt_required()
 def update_password():
     """
@@ -144,7 +144,7 @@ def update_password():
     return jsonify({"message": "Password updated"}), 200
 
 
-@app.route("/auth/update_info", methods=["POST"])
+@app.route("/auth/update_info", methods=["PATCH"])
 @jwt_required()
 def update_info():
     """
@@ -244,7 +244,7 @@ def get_post(post_id):
     if not post:
         return jsonify({"message": "Post not found"}), 404
 
-    return jsonify(post), 200
+    return jsonify(post=post), 200
 
 
 @app.route("/posts/<post_id>/add/<email>", methods=["PATCH"])
@@ -326,7 +326,7 @@ def get_all_posts():
     """
 
     all_posts = list(posts.find())
-    return jsonify(all_posts), 200
+    return jsonify(posts=all_posts), 200
 
 
 @app.route("/posts/search", methods=["GET"])
