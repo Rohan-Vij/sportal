@@ -35,9 +35,9 @@ const Login = () => {
   return (
     <div className="h-full w-full flex flex-row">
       {/* left title bar */}
-      <div className="bg-main h-full w-1/3 flex flex-col space-y-20 justify-center items-center">
-        <h1 className="text-white text-[7rem] font-extrabold">sportle</h1>
-        <h2 className="text-white text-[2.5rem]">lorem ipsum dolar amit</h2>
+      <div className="bg-main h-full w-1/3 flex flex-col space-y-10 justify-center items-center">
+        <h1 className="text-white text-[5rem] font-extrabold">sportal</h1>
+        <h2 className="text-white text-[2rem]">lorem ipsum dolar amit</h2>
       </div>
 
       {/* right content screen (with login) */}
