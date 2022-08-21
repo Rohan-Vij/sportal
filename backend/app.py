@@ -124,6 +124,7 @@ def refresh():
     access_token = create_access_token(identity=identity)
     return jsonify(access_token=access_token)
 
+
 @app.route("/auth/update_password", methods=["POST"])
 @jwt_required()
 def update_password():
@@ -138,8 +139,10 @@ def update_password():
         return jsonify({"message": "Password not provided"}), 400
 
     identity = get_jwt_identity()
-    users.update_one({"_id": ObjectId(identity)}, {"$set": {"password": password}})
+    users.update_one({"_id": ObjectId(identity)}, {
+                     "$set": {"password": password}})
     return jsonify({"message": "Password updated"}), 200
+
 
 @app.route("/auth/update_info", methods=["POST"])
 @jwt_required()
@@ -158,14 +161,33 @@ def update_info():
 
     identity = get_jwt_identity()
     if email:
-        users.update_one({"_id": ObjectId(identity)}, {"$set": {"email": email}})
+        users.update_one({"_id": ObjectId(identity)},
+                         {"$set": {"email": email}})
     elif phone:
-        users.update_one({"_id": ObjectId(identity)}, {"$set": {"phone": phone}})
-    
+        users.update_one({"_id": ObjectId(identity)},
+                         {"$set": {"phone": phone}})
+
     return jsonify({"message": "Information updated"}), 200
 
 
+@app.route("/auth/profile/<id>", methods=["GET"])
+@jwt_required()
+def profile(id):
+    """
+    Get the user's profile.
+
+    :param id: The user's id.
+    :return: The user's profile if the user is found, an error otherwise.
+    """
+    user = users.find_one({"_id": ObjectId(id)})
+    if not user:
+        return jsonify({"message": "User not found"}), 404
+
+    return jsonify(user), 200
+
+
 ## -- End User Management -- ##
+
 
 ## -- Post Management -- ##
 
@@ -203,11 +225,11 @@ def create_post():
         "is_open": is_open
     }
 
-
     _id = posts.insert_one(
         post_document).inserted_id
 
     return jsonify({"message": "Success", "id": str(_id)}), 200
+
 
 @app.route("/posts/<post_id>", methods=["GET"])
 def get_post(post_id):
@@ -223,6 +245,7 @@ def get_post(post_id):
         return jsonify({"message": "Post not found"}), 404
 
     return jsonify(post), 200
+
 
 @app.route("/posts/<post_id>/add/<email>", methods=["PATCH"])
 @jwt_required()
@@ -244,6 +267,7 @@ def add_participant(post_id, email):
     posts.update_one({"_id": ObjectId(post_id)}, {'$push': {'players': email}})
 
     return jsonify({"message": "Success"}), 200
+
 
 @app.route("/posts/<post_id>/remove/<email>", methods=["PATCH"])
 @jwt_required()
@@ -268,6 +292,7 @@ def remove_participant(post_id, email):
 
     return jsonify({"message": "Success"}), 200
 
+
 @app.route("/posts/<post_id>/close", methods=["PATCH"])
 @jwt_required()
 def close_post(post_id):
@@ -290,6 +315,7 @@ def close_post(post_id):
 
     return jsonify({"message": "Success"}), 200
 
+
 @app.route("/posts/all", methods=["GET"])
 @jwt_required()
 def get_all_posts():
@@ -301,6 +327,7 @@ def get_all_posts():
 
     all_posts = list(posts.find())
     return jsonify(all_posts), 200
+
 
 @app.route("/posts/search", methods=["GET"])
 @jwt_required()
