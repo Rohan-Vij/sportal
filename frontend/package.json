@@ -13,6 +13,8 @@
     "@fontsource/bebas-neue": "^4.5.8",
     "@fontsource/inter": "^4.5.12",
     "@fontsource/material-icons": "^4.5.4",
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
     "@popperjs/core": "^2.11.6",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
