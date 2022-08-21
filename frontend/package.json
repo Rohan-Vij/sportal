@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.12",
-    "@mdi/js": "^7.0.96",
-    "@mdi/react": "^1.6.1",
+    "@fontsource/material-icons": "^4.5.4",
+    "@popperjs/core": "^2.11.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-popper": "^2.3.0",
     "react-router-dom": "6"
   },
   "devDependencies": {
