@@ -44,7 +44,7 @@ const Dropdown = ({ title, htmlFor, elements, value, setValue }) => {
         } z-10 w-full bg-white divide-y divide-gray-100 border-dark-border border-4 rounded-xl`}
       >
         <ul
-          className="py-1 text-sm text-black"
+          className="py-1 text-sm text-black max-h-32 overflow-y-auto"
           aria-labelledby="dropdownDefault"
         >
           {elements.map((element, idx) => (

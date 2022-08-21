@@ -7,7 +7,6 @@ const Search = () => {
       <Navbar />
       <div className="w-full p-5 bg-background flex flex-col items-center space-y-5 h-full overflow-x-none overflow-y-auto">
         <Post
-          title="Tennis @ Emerald Glen"
           sport="Tennis"
           start="5:30pm"
           end="6:45pm"

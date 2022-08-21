@@ -12,6 +12,7 @@ const InputField = ({
   status,
   statusColor,
   statusTooltip,
+  onChange,
 }) => {
   const iconRef = useRef();
   const tooltipRef = useRef();
@@ -46,7 +47,9 @@ const InputField = ({
         type="text"
         className="bg-gray-50 border-4 text-gray-900 text-sm rounded-xl block w-full p-2.5 outline-none placeholder:italic"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) =>
+          onChange ? onChange(e.target.value) : setValue(e.target.value)
+        }
         onSelect={(e) =>
           (e.target.style.borderColor = theme.theme.colors["main"])
         }

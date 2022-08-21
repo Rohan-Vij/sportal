@@ -7,9 +7,8 @@ const Home = () => {
 
   useEffect(() => {
     if (!loggedIn) return navigate("/login");
+    else return navigate("/search");
   });
-
-  return <h1>hi</h1>;
 };
 
 export default Home;

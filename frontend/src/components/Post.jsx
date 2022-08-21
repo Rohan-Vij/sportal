@@ -16,7 +16,6 @@ import {
 import Button from "../components/Button";
 
 const Post = ({
-  title,
   sport,
   start,
   location,
@@ -60,7 +59,7 @@ const Post = ({
           </div>
           <div className="mt-2 w-[500px]">
             <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900">
-              {title}
+              {sport} @ {location}
             </h5>
             <p className="mb-2 text-md font-normal text-gray-700">
               Posted by {postedBy}

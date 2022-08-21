@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 
-const StyledDatePicker = ({ title, htmlFor, date, setDate }) => {
+const StyledDatePicker = ({ title, htmlFor, date, setDate, showTimeInput }) => {
   return (
     <div className="w-full">
       <label htmlFor={htmlFor} className="block text-lg font-medium text-black">
@@ -15,6 +15,7 @@ const StyledDatePicker = ({ title, htmlFor, date, setDate }) => {
           className="bg-inherit w-full h-full outline-none grow"
           popperClassName="box-border"
           htmlFor={htmlFor}
+          showTimeInput={showTimeInput}
         />
       </div>
     </div>
